@@ -12,11 +12,12 @@ class StockDetailsViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     private let useCase:StockUseCase
     
-    init(useCase: StockUseCase) {
+    init(stock: Stock, useCase: StockUseCase) {
         self.useCase = useCase
+        self.stock = stock
     }
     
-    public func getStocks() {
+    public func getStockDetails() {
         shouldShowLoader = true
         useCase.getStockDetails { [weak self] stock, error, statusCode in
             guard let self else { return }

@@ -9,27 +9,29 @@ import SwiftUI
 
 struct StockListView: View {
     @ObservedObject var viewModel = StockListViewModel(useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
+    
     var body: some View {
+        NavigationStack {
             Text("Stocks").font(.title).padding()
             List(viewModel.stocks) { stock in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Name ")
-                        Text(stock.shortName)
+                NavigationLink(destination: StockDetailsView(stock: stock)) {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Name ")
+                            Text(stock.shortName)
+                        }
+                        HStack {
+                            Text("Price")
+                            Text("\(stock.price)")
+                                .fontWeight(.bold)
+                        }
+                        Text(stock.market)
                     }
-                    HStack {
-                        Text("Price")
-                        Text("\(stock.price)")
-                            .fontWeight(.bold)
-                    }
-                    Text(stock.market)
-                }
-                .onTapGesture {
-                   
                 }
             }
-           
-            .onAppear {
+        }
+        .searchable(text: $viewModel.searchText, prompt: "Search stocks")
+        .onAppear {
             viewModel.getStocks()
         }
     }

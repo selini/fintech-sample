@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct StockDetailsView: View {
-    @ObservedObject var viewModel = StockDetailsViewModel(useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
+    @ObservedObject var viewModel: StockDetailsViewModel
+    
+    init(stock: Stock) {
+        viewModel = StockDetailsViewModel(stock: stock, useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -20,5 +25,5 @@ struct StockDetailsView: View {
 }
 
 #Preview {
-    StockDetailsView()
+    StockDetailsView(stock: Stock(shortName: "", price: 0, market: ""))
 }
