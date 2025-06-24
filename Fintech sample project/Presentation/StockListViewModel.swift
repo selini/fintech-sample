@@ -11,13 +11,14 @@ class StockListViewModel: ObservableObject {
     @Published var stocks: [Stock] = []
     @Published var allStocks: [Stock] = []
     @Published var searchText = ""
-    @Published public var shouldShowLoader: Bool?
+    @Published var shouldShowLoader: Bool = false
     private let useCase:StockUseCase
     private var cancellables = Set<AnyCancellable>()
     
     init(useCase: StockUseCase) {
         self.useCase = useCase
         handlePublished()
+        setupTimer()
     }
     
     private func handlePublished() {
@@ -31,6 +32,17 @@ class StockListViewModel: ObservableObject {
                     stocks = stocks.filter { $0.shortName.localizedCaseInsensitiveContains(searchText) }
                 }
             }).store(in: &cancellables)
+    }
+    
+    private func setupTimer() {
+        Timer
+            .publish(every: 8, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                print("reload stocks")
+                self?.getStocks()
+            }
+            .store(in: &cancellables)
     }
     
     public func getStocks() {

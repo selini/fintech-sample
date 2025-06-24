@@ -9,7 +9,7 @@ import SwiftUI
 
 class StockDetailsViewModel: ObservableObject {
     @Published var stock: Stock?
-    @Published public var shouldShowLoader: Bool?
+    @Published var shouldShowLoader: Bool = false
     private let useCase:StockUseCase
     
     init(stock: Stock, useCase: StockUseCase) {

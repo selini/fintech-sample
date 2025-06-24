@@ -13,6 +13,12 @@ struct StockListView: View {
     var body: some View {
         NavigationStack {
             Text("Stocks").font(.title).padding()
+            
+            if viewModel.shouldShowLoader {
+                ProgressView("Loading...")
+                    .padding()
+            }
+            
             List(viewModel.stocks) { stock in
                 NavigationLink(destination: StockDetailsView(stock: stock)) {
                     VStack(alignment: .leading) {

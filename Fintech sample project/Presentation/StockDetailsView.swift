@@ -15,11 +15,19 @@ struct StockDetailsView: View {
     }
     
     var body: some View {
+        if viewModel.shouldShowLoader {
+            ProgressView("Loading...")
+                .padding()
+        }
+        
         VStack {
             HStack {
                 Text("Name ")
                 Text(viewModel.stock?.shortName ?? "")
             }
+        }
+        .onAppear{
+            viewModel.getStockDetails()
         }
     }
 }
