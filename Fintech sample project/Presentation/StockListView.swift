@@ -10,14 +10,26 @@ import SwiftUI
 struct StockListView: View {
     @ObservedObject var viewModel = StockListViewModel(useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
     var body: some View {
-        List(viewModel.stocks){ stock in
-            VStack{
-                Text(stock.shortName)
-                    .font(.body)
-                Text(stock.market)
-                    .font(.callout)
+            Text("Stocks").font(.title).padding()
+            List(viewModel.stocks) { stock in
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Name ")
+                        Text(stock.shortName)
+                    }
+                    HStack {
+                        Text("Price")
+                        Text("\(stock.price)")
+                            .fontWeight(.bold)
+                    }
+                    Text(stock.market)
+                }
+                .onTapGesture {
+                   
+                }
             }
-        }.onAppear {
+           
+            .onAppear {
             viewModel.getStocks()
         }
     }

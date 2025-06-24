@@ -7,7 +7,7 @@
 import SwiftUI
 
 class StockListViewModel: ObservableObject {
-    @Published var stocks: [Stocks] = []
+    @Published var stocks: [Stock] = []
     @Published public var shouldShowLoader: Bool?
     private let useCase:StockUseCase
     

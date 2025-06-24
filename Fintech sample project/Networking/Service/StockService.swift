@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol StockService {
-    func getStocks(completionHandler: @escaping ([Stocks], Error?, Int?) -> Void)
+    func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void)
 }
 
 class StockServiceImpl: StockService {
@@ -17,10 +17,10 @@ class StockServiceImpl: StockService {
     var cancellable = Set<AnyCancellable>()
     var apiCall = APICalls()
     
-    func getStocks(completionHandler: @escaping ([Stocks], (Error)?, Int? ) -> Void) {
+    func getStocks(completionHandler: @escaping ([Stock], (Error)?, Int? ) -> Void) {
         apiCall.get(url: url.appendingPathComponent("get-summary"), requestData: nil) { apiResponse in
             guard let data = apiResponse.data,
-                  let response = try? JSONDecoder().decode([Stocks].self, from: data)
+                  let response = try? JSONDecoder().decode([Stock].self, from: data)
             else {
                 if apiResponse.statusCode == 400 {
                     return completionHandler([], nil, apiResponse.statusCode)

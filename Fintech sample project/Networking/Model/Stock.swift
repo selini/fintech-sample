@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct Stocks: Identifiable,Decodable {
+struct Stock: Identifiable,Decodable {
     var id = UUID()
     let shortName: String
+    let price: Int
     let market: String
 }
 
