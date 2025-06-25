@@ -13,3 +13,10 @@ struct Stock: Identifiable, Decodable {
     let symbol: String
     let description: String
 }
+
+struct StockDetails: Decodable {
+    let name: String
+    let ticker: String
+    let logo: String?
+    let finnhubIndustry: String
+}

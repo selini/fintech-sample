@@ -7,7 +7,7 @@
 
 protocol StockUseCase {
     func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void)
-    func getStockDetails(completionHandler: @escaping (Stock?, Error?, Int?) -> Void)
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, Error?, Int?) -> Void)
 }
 
 class StockUseCaseImpl: StockUseCase {
@@ -21,7 +21,7 @@ class StockUseCaseImpl: StockUseCase {
         stockService.getStocks(completionHandler: completionHandler)
     }
     
-    func getStockDetails(completionHandler: @escaping (Stock?, Error?, Int?) -> Void) {
-        stockService.getStockDetails(completionHandler: completionHandler)
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, Error?, Int?) -> Void) {
+        stockService.getStockDetails(symbol, completionHandler: completionHandler)
     }
 }

@@ -6,8 +6,14 @@
 //
 
 final class StockServiceMock: StockService {
-    func getStockDetails(completionHandler: @escaping (Stock?, Error?, Int?) -> Void) {
-        completionHandler(Stock(symbol: "test 1", description: "us"), nil, 200)
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, Error?, Int?) -> Void) {
+        let stockDetails = StockDetails(
+            name: "Apple Inc",
+            ticker: "AAPL",
+            logo: "https://static.finnhub.io/logo/2b7c9cf0-apple.png",
+            finnhubIndustry: "Technology"
+        )
+        completionHandler(stockDetails, nil, 200)
     }
     
     func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void) {
@@ -18,15 +24,14 @@ final class StockServiceMock: StockService {
         ]
         completionHandler(stocks, nil, 200)
     }
-    
 }
 
 final class StockServiceFailedMock: StockService {
-    func getStockDetails(completionHandler: @escaping (Stock?, Error?, Int?) -> Void) {
-        completionHandler(nil, .badServerResponse, 400)
-    }
-    
     func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void) {
         completionHandler([], .badServerResponse, 400)
+    }
+        
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, Error?, Int?) -> Void) {
+        completionHandler(nil, .badServerResponse, 400)
     }
 }

@@ -30,13 +30,13 @@ struct Fintech_sample_projectTests {
     }
     
     @Test func successfulGetStockDetails() {
-        useCase.getStockDetails { _, error, _ in
+        useCase.getStockDetails("") { _, error, _ in
             #expect(error == nil)
         }
     }
 
     @Test func unsuccessfulGetStockDetails() {
-        useCaseFailed.getStockDetails { _, error, _ in
+        useCaseFailed.getStockDetails("") { _, error, _ in
             #expect(error != nil)
         }
     }

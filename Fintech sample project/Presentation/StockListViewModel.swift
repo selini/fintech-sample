@@ -36,7 +36,7 @@ class StockListViewModel: ObservableObject {
     
     private func setupTimer() {
         Timer
-            .publish(every: 8, on: .main, in: .common)
+            .publish(every: 60, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 print("reload stocks")

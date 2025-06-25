@@ -10,8 +10,8 @@ import SwiftUI
 struct StockDetailsView: View {
     @ObservedObject var viewModel: StockDetailsViewModel
     
-    init(stock: Stock) {
-        viewModel = StockDetailsViewModel(stock: stock, useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
+    init(symbol: String) {
+        viewModel = StockDetailsViewModel(symbol: symbol, useCase: StockUseCaseImpl(stockService: StockServiceImpl()))
     }
     
     var body: some View {
@@ -19,19 +19,47 @@ struct StockDetailsView: View {
             ProgressView("Loading...")
                 .padding()
         }
-        
-        VStack {
-            HStack {
-                Text("Name ")
-                Text(viewModel.stock?.symbol ?? "")
+        Text("Stock Details")
+            .font(.title)
+        VStack(alignment: .leading) {
+            AsyncImage(url: URL(string: viewModel.stock?.logo ?? "")) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                case .failure:
+                    Image(systemName: "photo")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                @unknown default:
+                    EmptyView()
+                }
             }
+            HStack {
+                Text ("Name")
+                Text(viewModel.stock?.name ?? "")
+            }
+            HStack {
+                Text ("Ticker")
+                Text(viewModel.stock?.ticker ?? "")
+            }
+            HStack {
+                Text ("Industry")
+                Text(viewModel.stock?.finnhubIndustry ?? "")
+            }
+            Spacer()
+            
         }
-        .onAppear{
+        .onAppear {
             viewModel.getStockDetails()
         }
     }
 }
 
 #Preview {
-    StockDetailsView(stock: Stock(symbol: "test 1", description: "us"))
+    StockDetailsView(symbol: "")
 }
