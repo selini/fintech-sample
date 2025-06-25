@@ -7,14 +7,14 @@
 
 final class StockServiceMock: StockService {
     func getStockDetails(completionHandler: @escaping (Stock?, Error?, Int?) -> Void) {
-        completionHandler(Stock(shortName: "test 1", price: 10, market: "us"), nil, 200)
+        completionHandler(Stock(symbol: "test 1", description: "us"), nil, 200)
     }
     
     func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void) {
-        let stocks = [Stock(shortName: "test 1", price: 10, market: "us"),
-                      Stock(shortName: "test 2", price: 15, market: "us"),
-                      Stock(shortName: "test 3", price: 20, market: "us"),
-                      Stock(shortName: "test 4", price: 15, market: "us")
+        let stocks = [Stock(symbol: "test 1", description: "us"),
+                      Stock(symbol: "test 2", description: "us"),
+                      Stock(symbol: "test 3", description: "us"),
+                      Stock(symbol: "test 4", description: "us")
         ]
         completionHandler(stocks, nil, 200)
     }

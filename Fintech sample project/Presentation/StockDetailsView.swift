@@ -23,7 +23,7 @@ struct StockDetailsView: View {
         VStack {
             HStack {
                 Text("Name ")
-                Text(viewModel.stock?.shortName ?? "")
+                Text(viewModel.stock?.symbol ?? "")
             }
         }
         .onAppear{
@@ -33,5 +33,5 @@ struct StockDetailsView: View {
 }
 
 #Preview {
-    StockDetailsView(stock: Stock(shortName: "", price: 0, market: ""))
+    StockDetailsView(stock: Stock(symbol: "test 1", description: "us"))
 }

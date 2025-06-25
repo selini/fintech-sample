@@ -24,14 +24,13 @@ struct StockListView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Name ")
-                            Text(stock.shortName)
+                            Text(stock.symbol)
                         }
                         HStack {
-                            Text("Price")
-                            Text("\(stock.price)")
+                            Text("Description")
+                            Text(stock.description)
                                 .fontWeight(.bold)
                         }
-                        Text(stock.market)
                     }
                 }
             }

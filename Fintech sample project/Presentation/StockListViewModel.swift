@@ -29,7 +29,7 @@ class StockListViewModel: ObservableObject {
                 if searchText.isEmpty {
                     stocks = allStocks
                 } else {
-                    stocks = stocks.filter { $0.shortName.localizedCaseInsensitiveContains(searchText) }
+                    stocks = stocks.filter { $0.symbol.localizedCaseInsensitiveContains(searchText) }
                 }
             }).store(in: &cancellables)
     }
