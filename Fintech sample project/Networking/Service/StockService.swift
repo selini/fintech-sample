@@ -10,15 +10,16 @@ import Combine
 
 protocol StockService {
     func getStocks(completionHandler: @escaping ([Stock], Error?, Int?) -> Void)
-    func getStockDetails(completionHandler: @escaping (Stock?, (Error)?, Int? ) -> Void)
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, (Error)?, Int? ) -> Void)
 }
 
 class StockServiceImpl: StockService {
-    var cancellable = Set<AnyCancellable>()
-    var apiCall = APICalls()
+    private var cancellable = Set<AnyCancellable>()
+    private var apiCall = APICalls()
+    private let apiKey = "d1dqrahr01qpp0b3hu7gd1dqrahr01qpp0b3hu80"
     
     func getStocks(completionHandler: @escaping ([Stock], (Error)?, Int? ) -> Void) {
-        let url = URL(string: "https://yh-finance.p.rapidapi.com/market/v2/get-summary")!
+        let url = URL(string: "https://finnhub.io/api/v1/stock/symbol?exchange=US&token=\(apiKey)")!
         apiCall.get(url: url, requestData: nil) { apiResponse in
             guard let data = apiResponse.data,
                   let response = try? JSONDecoder().decode([Stock].self, from: data)
@@ -30,11 +31,11 @@ class StockServiceImpl: StockService {
         
     }
     
-    func getStockDetails(completionHandler: @escaping (Stock?, (Error)?, Int? ) -> Void) {
-        let url = URL(string: "https://yh-finance.p.rapidapi.com/stock/v2/get-summary")!
+    func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, (Error)?, Int? ) -> Void) {
+        let url = URL(string: "https://finnhub.io/api/v1/stock/profile2?symbol=\(symbol)&token=\(apiKey)")!
         apiCall.get(url: url, requestData: nil) { apiResponse in
             guard let data = apiResponse.data,
-                  let response = try? JSONDecoder().decode(Stock.self, from: data)
+                  let response = try? JSONDecoder().decode(StockDetails.self, from: data)
             else {
                 return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
             }

@@ -29,14 +29,14 @@ class StockListViewModel: ObservableObject {
                 if searchText.isEmpty {
                     stocks = allStocks
                 } else {
-                    stocks = stocks.filter { $0.shortName.localizedCaseInsensitiveContains(searchText) }
+                    stocks = stocks.filter { $0.symbol.localizedCaseInsensitiveContains(searchText) }
                 }
             }).store(in: &cancellables)
     }
     
     private func setupTimer() {
         Timer
-            .publish(every: 8, on: .main, in: .common)
+            .publish(every: 60, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 print("reload stocks")

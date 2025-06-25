@@ -20,18 +20,17 @@ struct StockListView: View {
             }
             
             List(viewModel.stocks) { stock in
-                NavigationLink(destination: StockDetailsView(stock: stock)) {
+                NavigationLink(destination: StockDetailsView(symbol: stock.symbol)) {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Name ")
-                            Text(stock.shortName)
+                            Text(stock.symbol)
                         }
                         HStack {
-                            Text("Price")
-                            Text("\(stock.price)")
+                            Text("Description")
+                            Text(stock.description)
                                 .fontWeight(.bold)
                         }
-                        Text(stock.market)
                     }
                 }
             }
