@@ -16,9 +16,9 @@ protocol StockService {
 class StockServiceImpl: StockService {
     private var cancellable = Set<AnyCancellable>()
     private var apiCall = APICalls()
-    private let apiKey = "d1dqrahr01qpp0b3hu7gd1dqrahr01qpp0b3hu80"
-    
+   
     func getStocks(completionHandler: @escaping ([Stock], (Error)?, Int? ) -> Void) {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String else { return }
         let url = URL(string: "https://finnhub.io/api/v1/stock/symbol?exchange=US&token=\(apiKey)")!
         apiCall.get(url: url, requestData: nil) { apiResponse in
             guard let data = apiResponse.data,
@@ -32,6 +32,7 @@ class StockServiceImpl: StockService {
     }
     
     func getStockDetails(_ symbol: String, completionHandler: @escaping (StockDetails?, (Error)?, Int? ) -> Void) {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String else { return }
         let url = URL(string: "https://finnhub.io/api/v1/stock/profile2?symbol=\(symbol)&token=\(apiKey)")!
         apiCall.get(url: url, requestData: nil) { apiResponse in
             guard let data = apiResponse.data,

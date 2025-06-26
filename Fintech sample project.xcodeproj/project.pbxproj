@@ -29,9 +29,22 @@
 		01C05D962E098AE000536979 /* Fintech sample projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fintech sample projectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0124AE362E0D6ED70098F07B /* Exceptions for "Fintech sample project" folder in "Fintech sample project" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Fintech-sample-project-Info.plist",
+			);
+			target = 01C05D7E2E098AD700536979 /* Fintech sample project */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		01C05D812E098AD700536979 /* Fintech sample project */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0124AE362E0D6ED70098F07B /* Exceptions for "Fintech sample project" folder in "Fintech sample project" target */,
+			);
 			path = "Fintech sample project";
 			sourceTree = "<group>";
 		};
@@ -170,6 +183,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					ApiKey,
+				);
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
@@ -400,6 +416,7 @@
 				DEVELOPMENT_TEAM = 4L623JD48M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Fintech-sample-project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +445,7 @@
 				DEVELOPMENT_TEAM = 4L623JD48M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Fintech-sample-project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
